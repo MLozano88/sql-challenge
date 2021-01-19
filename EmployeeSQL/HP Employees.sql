@@ -7,23 +7,23 @@ DROP TABLE IF EXISTS titles;
 
 
 CREATE TABLE departments (
-	dept_no VARCHAR (PK),
+	dept_no VARCHAR PRIMARY KEY,
 	dept_name VARCHAR
 );
 
 CREATE TABLE dept_emp (
-	emp_no VARCHAR,
-	dept_no VARCHAR (FK >- departments.dept_no)
+	emp_no SERIAL PRIMARY KEY,
+	dept_no VARCHAR FOREIGN KEY "FK >- departments.dept_no"
 );
 
 CREATE TABLE dept_manager (
-	dept_no VARCHAR (FK >- departments.dept_no),
-	emp_no VARCHAR (FK >- dept_emp.emp_no)
+	dept_no VARCHAR FOREIGN KEY "FK >- departments.dept_no"
+	emp_no VARCHAR FOREIGN KEY "FK >- dept_emp.emp_no"
 );
 
 CREATE TABLE employees (
-	emp_no VARCHAR (FK >- dept_emp.emp_no),
-	emp_title_id VARCHAR (PK FK >- titles.title_id),
+	emp_no VARCHAR FOREIGN KEY "FK >- dept_emp.emp_no"
+	emp_title_id SERIAL PRIMARY KEY,
 	birth_date TIMESTAMP,
 	first_name VARCHAR,
 	last_name VARCHAR,
@@ -32,7 +32,7 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE salaries (
-	emp_no VARCHAR (FK >- dept_emp.emp_no),
+	emp_no SERIAL FOREIGN KEY "FK >- dept_emp.emp_no"
 	salary INT
 );
 
