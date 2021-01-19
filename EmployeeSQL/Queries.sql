@@ -12,4 +12,21 @@ FROM employees
 WHERE hire_date between '1986-01-01' and '1986-12-31'
 
 "List the manager of each department with the following information: department number, department name, 
-the manager's employee number, last name, first name."
+the manager's employee number, last name, first name.(INCOMPLETE!!!)"
+SELECT emp_no, first_name, last_name
+FROM employees
+WHERE emp_no IN
+(
+	SELECT emp_no
+	FROM dept_emp
+	WHERE emp_no IN
+	(
+		SELECT emp_no
+		FROM dept_manager
+		WHERE dept_no IN
+		(
+			SELECT dept_no
+			FROM departments
+		)
+	)
+);
